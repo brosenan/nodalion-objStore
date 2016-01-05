@@ -100,3 +100,20 @@ ns._register('objStoreToTmp', (Hash) => $S.callback(function*(nodalion) {
     yield cat.on('end', $RR());
     return path;
 }));
+
+ns._register('objStoreGet', function(hash) {
+    return function(req, res, next) {
+	exports.cat(hash).pipe(res);
+    };
+});
+
+ns._register('objStoreBody', function() {
+    return function(req, res, next) {
+	exports.add(req, function(err, hash) {
+	    if(err) return next(err);
+	    req.body = hash;
+	    next();
+	});
+    };
+});
+

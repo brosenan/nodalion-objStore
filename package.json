@@ -1,13 +1,13 @@
 {
   "name": "nodalion-objstore",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A pkgcloud storage wrapper for nodalion",
   "main": "objStore.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "docker run -i --link=fakes3 -v $PWD:/project brosenan/nodalion npm run-script test-in-container",
+    "test": "docker run -i --link=fakes3 -v $PWD:/project -v /tmp:/tmp brosenan/nodalion npm run-script test-in-container",
     "test-in-container": "./node_modules/mocha/bin/mocha -C -R dot"
   },
   "repository": {
@@ -28,7 +28,10 @@
   },
   "homepage": "https://github.com/brosenan/nodalion-objStore#readme",
   "devDependencies": {
-    "mocha": "^2.3.4"
+    "express": "^4.13.3",
+    "mocha": "^2.3.4",
+    "nodalion-http": "^1.0.1",
+    "request": "^2.67.0"
   },
   "dependencies": {
     "nodalion": "^1.0.6",
