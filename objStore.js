@@ -103,7 +103,9 @@ ns._register('objStoreToTmp', (Hash) => $S.callback(function*(nodalion) {
 
 ns._register('objStoreGet', function(hash) {
     return function(req, res, next) {
-	exports.cat(hash).pipe(res);
+	var stream = exports.cat(hash);
+	stream.pipe(res);
+	stream.on('error', next);
     };
 });
 
