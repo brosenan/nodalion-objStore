@@ -4,16 +4,20 @@ var fs = require('fs');
 var $S = require('suspend'), $R = $S.resume, $RR = $S.resumeRaw, $T = function(gen) { return function(done) { $S.run(gen, done); } };
 var EventEmitter = require('events').EventEmitter;
 var crypto = require('crypto');
-
+var pkgcloud = require('pkgcloud');
 var Nodalion = require('nodalion');
 var ns = Nodalion.namespace('/nodalion', []);
+
+pkgcloud.providers.filesystem = {
+    storage: require('filesystem-storage-pkgcloud'),
+};
 
 var dataDir = '/tmp';
 var client;
 var container;
 
 exports.configure = function(config) {
-    client = require('pkgcloud').storage.createClient(config);
+    client = pkgcloud.storage.createClient(config);
     container = config.container;
 }
 

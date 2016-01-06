@@ -1,6 +1,6 @@
 {
   "name": "nodalion-objstore",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A pkgcloud storage wrapper for nodalion",
   "main": "objStore.js",
   "directories": {
@@ -34,6 +34,7 @@
     "request": "^2.67.0"
   },
   "dependencies": {
+    "filesystem-storage-pkgcloud": "0.0.2",
     "nodalion": "^1.0.6",
     "pkgcloud": "^1.1.0",
     "suspend": "^0.7.0"
