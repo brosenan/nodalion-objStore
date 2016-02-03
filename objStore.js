@@ -32,9 +32,10 @@ function writeToTmp(stream, cb) {
     var tmpFile = temp.path();
     var output = fs.createWriteStream(tmpFile);
     stream.on('data', data => { hasher.update(data); });
-    stream.on('end', () => { cb(undefined, {tmpFile: tmpFile,
-					    hash: hasher.digest('base64').replace(/\//g, '_')}); });
+    stream.on('error', cb);
     output.on('error', cb);
+    output.on('finish', () => { cb(undefined, {tmpFile: tmpFile,
+					       hash: hasher.digest('base64').replace(/\//g, '_')}); });
     stream.pipe(output);
 }
 
